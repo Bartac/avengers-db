@@ -7,6 +7,7 @@ import io.avengers.dao.HeroDAO;
 import io.avengers.domain.Hero;
 
 public class HeroService {
+
 	IllegalStateException stateException = new IllegalStateException("Error, contact your admin");
 
 	public Set<Hero> findAll() {
