@@ -4,15 +4,17 @@ public class Hero {
 	int id;
 	String name;
 	Sex sex;
-	long likes;
-	long dislikes;
+	byte[] picture;
+	String abilities;
+	String history;
 
-	public Hero(int id, String name, Sex sex, long likes, long dislikes) {
+	public Hero(int id, String name, Sex sex, byte[] picture, String abilities, String history) {
 		this.id = id;
 		this.name = name;
 		this.sex = sex;
-		this.likes = likes;
-		this.dislikes = dislikes;
+		this.picture = picture;
+		this.abilities = abilities;
+		this.history = history;
 	}
 
 	@Override
@@ -44,20 +46,28 @@ public class Hero {
 		this.sex = sex;
 	}
 
-	public long getLikes() {
-		return likes;
+	public byte[] getPicture() {
+		return picture;
 	}
 
-	public void setLikes(long likes) {
-		this.likes = likes;
+	public void setPicture(byte[] picture) {
+		this.picture = picture;
 	}
 
-	public long getDislikes() {
-		return dislikes;
+	public String getAbilities() {
+		return abilities;
 	}
 
-	public void setDislikes(long dislikes) {
-		this.dislikes = dislikes;
+	public void setAbilities(String abilities) {
+		this.abilities = abilities;
+	}
+
+	public String getHistory() {
+		return history;
+	}
+
+	public void setHistory(String history) {
+		this.history = history;
 	}
 
 }
