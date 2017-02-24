@@ -1,7 +1,6 @@
 package io.avengers.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -11,7 +10,7 @@ import java.util.Set;
 import io.avengers.domain.Hero;
 import io.avengers.domain.Sex;
 
-public class HeroDAO extends MarvelDAO{
+public class HeroDAO extends MarvelDAO {
 
 	public HeroDAO() {
 		super();
@@ -21,9 +20,7 @@ public class HeroDAO extends MarvelDAO{
 
 		String query = "SELECT * FROM `heroes`";
 
-		// 3306 no password
 		Connection connect = connectToMySQL();
-
 		Statement statement = connect.createStatement();
 		ResultSet resultSet = statement.executeQuery(query);
 		Set<Hero> heroes = new HashSet<>();
@@ -34,17 +31,13 @@ public class HeroDAO extends MarvelDAO{
 
 		connect.close();
 		return heroes;
-
 	}
 
 	public Set<Hero> findHeroesByName(String term) throws SQLException {
-		String query = "SELECT h.id, h.name, h.sex, i.name, m.name, t.team_name, h.picture, h.abilities, h.history, t.picture FROM heroes h INNER JOIN movie_hero mh ON h.id = mh.id_hero" 
-	+ " INNER JOIN movie m ON mh.id_movie = m.id INNER JOIN team_hero th ON th.hero_id = h.id INNER JOIN team t ON t.team_id = th.team_id INNER JOIN irl i ON i.hero_id = h.id"
-				+ " WHERE h.name LIKE '%" + term + "%'";
 
-		// 3306 no password
+		String query = "SELECT * FROM `heroes` WHERE name = '" + term + "'";
+
 		Connection connect = connectToMySQL();
-
 		Statement statement = connect.createStatement();
 		ResultSet resultSet = statement.executeQuery(query);
 		Set<Hero> heroes = new HashSet<>();
@@ -63,15 +56,14 @@ public class HeroDAO extends MarvelDAO{
 			int id = resultSet.getInt("id");
 			String name = resultSet.getString("name");
 			String sSex = resultSet.getString("sex");
-			long likes = resultSet.getLong("likes");
-			long dislikes = resultSet.getLong("dislikes");
-
-			Hero h = new Hero(id, name, Sex.O, likes, dislikes);
-
+			byte[] picture = resultSet.getBytes("picture");
+			String abilities = resultSet.getString("abilities");
+			String history = resultSet.getString("history");
+			Hero h = new Hero(id, name, Sex.O, picture, abilities, history);
 			return h;
+
 		} catch (SQLException e) {
 			throw new IllegalStateException("DataBase has move: " + e.getMessage());
 		}
 	}
-
 }
