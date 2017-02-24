@@ -8,7 +8,7 @@ public class Movie {
 	byte[] picture;
 	String history;
 	Date date;
-	
+
 	public Movie(int id, String name, byte[] picture, String history, Date date) {
 		this.id = id;
 		this.name = name;
@@ -16,7 +16,7 @@ public class Movie {
 		this.history = history;
 		this.date = date;
 	}
-	
+
 	@Override
 	public String toString() {
 		return this.name;
@@ -61,8 +61,5 @@ public class Movie {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	
-	
 
-	
 }

@@ -3,23 +3,23 @@ package io.avengers.service;
 import java.sql.SQLException;
 import java.util.Set;
 
-import io.avengers.dao.HeroDAO;
-import io.avengers.domain.Hero;
+import io.avengers.dao.TeamDAO;
+import io.avengers.domain.Team;
 
-public class HeroService {
+public class TeamService {
 
 	IllegalStateException stateException = new IllegalStateException("BDD OFF: ");
 
-	public Set<Hero> findAll() {
+	public Set<Team> findAll() {
 		try {
-			return new HeroDAO().findAll();
+			return new TeamDAO().findAll();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw stateException;
 		}
 	}
 
-	public Set<Hero> findHeroesByName(String term) {
+	public Set<Team> findTeamByName(String term) {
 		if (term == null) {
 			System.out.println("Potential bug or illegal request ");
 			return this.findAll();
@@ -28,9 +28,10 @@ public class HeroService {
 			return this.findAll();
 		}
 		try {
-			return new HeroDAO().findHeroesByName(term);
+			return new TeamDAO().findTeamByName(term);
 		} catch (SQLException e) {
 			throw stateException;
 		}
 	}
+
 }
