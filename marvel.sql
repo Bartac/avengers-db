@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 
 --
 -- Doublure de structure pour la vue `hero`
--- (Voir ci-dessous la vue réelle)
+-- (Voir ci-dessous la vue réellee)
 --
 CREATE TABLE `hero` (
 `team_name` varchar(16)
