@@ -9,8 +9,10 @@ public class Hero {
 	String history;
 	String movies_name;
 	String team_name;
+	String real_name;
 
-	public Hero(int id, String name, Sex sex, byte[] picture, String abilities, String history, String movies_name, String team_name) {
+	public Hero(int id, String name, Sex sex, byte[] picture, String abilities, String history, String movies_name,
+			String team_name, String real_name) {
 		this.id = id;
 		this.name = name;
 		this.sex = sex;
@@ -19,20 +21,12 @@ public class Hero {
 		this.history = history;
 		this.movies_name = movies_name;
 		this.team_name = team_name;
+		this.real_name = real_name;
 	}
-	
-	
 
 	public Hero(String name) {
 		super();
 		this.name = name;
-	}
-
-
-
-	@Override
-	public String toString() {
-		return this.id + " - " + this.name;
 	}
 
 	public int getId() {
@@ -82,21 +76,29 @@ public class Hero {
 	public void setHistory(String history) {
 		this.history = history;
 	}
-	
-	public String getMoviesName() {
+
+	public String getMovies_name() {
 		return movies_name;
 	}
 
-	public void setMoviesName(String movies_name) {
+	public void setMovies_name(String movies_name) {
 		this.movies_name = movies_name;
 	}
-	
-	public String getTeamName() {
+
+	public String getTeam_name() {
 		return team_name;
 	}
 
-	public void setTeamName(String team_name) {
+	public void setTeam_name(String team_name) {
 		this.team_name = team_name;
+	}
+
+	public String getReal_name() {
+		return real_name;
+	}
+
+	public void setReal_name(String real_name) {
+		this.real_name = real_name;
 	}
 
 	@Override
