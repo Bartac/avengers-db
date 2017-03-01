@@ -35,7 +35,7 @@ public class HeroDAO extends MarvelDAO {
 
 	public Set<Hero> findHeroesByName(String term) throws SQLException {
 
-		String query = "SELECT h.id, h.name, h.sex, i.name, m.name, t.team_name, h.picture, h.abilities, h.history, t.picture FROM heroes h INNER JOIN movie_hero mh ON h.id = mh.id_hero " 
+		String query = "SELECT h.id, h.name, h.sex, i.name, m.name AS movies_name, t.team_name AS team_name, h.picture, h.abilities, h.history, t.picture FROM heroes h INNER JOIN movie_hero mh ON h.id = mh.id_hero " 
 				+ "INNER JOIN movie m ON mh.id_movie = m.id INNER JOIN team_hero th ON th.hero_id = h.id INNER JOIN team t ON t.team_id = th.team_id INNER JOIN irl i ON i.hero_id = h.id "
 				+ "WHERE h.name LIKE '%" + term +"%'";
 
@@ -61,7 +61,10 @@ public class HeroDAO extends MarvelDAO {
 			byte[] picture = resultSet.getBytes("picture");
 			String abilities = resultSet.getString("abilities");
 			String history = resultSet.getString("history");
-			Hero h = new Hero(id, name, Sex.O, picture, abilities, history);
+			String movies_name = resultSet.getString("movies_name");
+			String team_name = resultSet.getString("team_name");
+
+			Hero h = new Hero(id, name, Sex.O, picture, abilities, history, movies_name, team_name);
 			return h;
 
 		} catch (SQLException e) {

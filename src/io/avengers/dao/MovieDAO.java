@@ -33,7 +33,6 @@ public class MovieDAO extends MarvelDAO {
 
 		connect.close();
 		return movies;
-
 	}
 
 	public Set<Movie> findMoviesByName(String term) throws SQLException {
@@ -42,7 +41,6 @@ public class MovieDAO extends MarvelDAO {
 
 		// 3306 no password
 		Connection connect = connectToMySQL();
-
 		Statement statement = connect.createStatement();
 		ResultSet resultSet = statement.executeQuery(query);
 		Set<Movie> movies = new HashSet<>();

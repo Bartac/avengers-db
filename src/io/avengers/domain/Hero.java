@@ -7,14 +7,18 @@ public class Hero {
 	byte[] picture;
 	String abilities;
 	String history;
+	String movies_name;
+	String team_name;
 
-	public Hero(int id, String name, Sex sex, byte[] picture, String abilities, String history) {
+	public Hero(int id, String name, Sex sex, byte[] picture, String abilities, String history, String movies_name, String team_name) {
 		this.id = id;
 		this.name = name;
 		this.sex = sex;
 		this.picture = picture;
 		this.abilities = abilities;
 		this.history = history;
+		this.movies_name = movies_name;
+		this.team_name = team_name;
 	}
 	
 	
@@ -77,6 +81,22 @@ public class Hero {
 
 	public void setHistory(String history) {
 		this.history = history;
+	}
+	
+	public String getMoviesName() {
+		return movies_name;
+	}
+
+	public void setMoviesName(String movies_name) {
+		this.movies_name = movies_name;
+	}
+	
+	public String getTeamName() {
+		return team_name;
+	}
+
+	public void setTeamName(String team_name) {
+		this.team_name = team_name;
 	}
 
 	@Override

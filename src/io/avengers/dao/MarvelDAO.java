@@ -16,7 +16,6 @@ public class MarvelDAO {
 				throw new IllegalStateException("SQL driver is not here: " + e.getMessage());
 			}
 		}
-		
 	}
 	
 	Connection connectToMySQL() {

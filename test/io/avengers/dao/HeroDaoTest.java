@@ -45,11 +45,11 @@ public class HeroDaoTest {
 		Hero hero = new Hero("Hulk");
 		
 		assertTrue(dao.findHeroesByName("ulk").contains(hero));
+		System.out.println(dao.findHeroesByName(""));
 	}
 
 	@Test
 	public void testResultSetToHero() {
 		fail("Not yet implemented");
 	}
-
 }
