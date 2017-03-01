@@ -18,7 +18,10 @@ public class HeroDAO extends MarvelDAO {
 
 	public Set<Hero> findAll() throws SQLException {
 
-		String query = "SELECT * FROM `heroes`";
+		String query = "SELECT h.id, h.name, h.sex, i.name, m.name AS movies_name, t.team_name AS team_name, h.picture, h.abilities, h.history, t.picture "
+				+ "FROM heroes h LEFT JOIN movie_hero mh ON h.id = mh.id_hero LEFT JOIN movie m ON mh.id_movie = m.id "
+				+ "LEFT JOIN team_hero th ON th.hero_id = h.id LEFT JOIN team t ON t.team_id = th.team_id LEFT JOIN irl i ON i.hero_id = h.id "
+				+ "WHERE h.name LIKE '%%'";
 
 		Connection connect = connectToMySQL();
 		Statement statement = connect.createStatement();
@@ -35,9 +38,10 @@ public class HeroDAO extends MarvelDAO {
 
 	public Set<Hero> findHeroesByName(String term) throws SQLException {
 
-		String query = "SELECT h.id, h.name, h.sex, i.name, m.name AS movies_name, t.team_name AS team_name, h.picture, h.abilities, h.history, t.picture FROM heroes h INNER JOIN movie_hero mh ON h.id = mh.id_hero " 
-				+ "INNER JOIN movie m ON mh.id_movie = m.id INNER JOIN team_hero th ON th.hero_id = h.id INNER JOIN team t ON t.team_id = th.team_id INNER JOIN irl i ON i.hero_id = h.id "
-				+ "WHERE h.name LIKE '%" + term +"%'";
+		String query = "SELECT h.id, h.name, h.sex, i.name, m.name AS movies_name, t.team_name AS team_name, h.picture, h.abilities, h.history, t.picture "
+				+ "FROM heroes h LEFT JOIN movie_hero mh ON h.id = mh.id_hero LEFT JOIN movie m ON mh.id_movie = m.id "
+				+ "LEFT JOIN team_hero th ON th.hero_id = h.id LEFT JOIN team t ON t.team_id = th.team_id LEFT JOIN irl i ON i.hero_id = h.id "
+				+ "WHERE h.name LIKE '%"+term+"%'";
 
 		Connection connect = connectToMySQL();
 		Statement statement = connect.createStatement();

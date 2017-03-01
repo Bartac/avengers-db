@@ -33,21 +33,23 @@ public class MovieDaoTest {
 
 	@Test
 	public void testFindAll() throws SQLException {
-		// Check the numbers of movies
+		// Test if contains DB
 		assertTrue(dao.findAll().size() > 5);
 	}
 
 	@Test
 	public void testFindMoviesByName() throws Exception {
 		// Check if movie name avengers exist
-		Set<Movie> movies1 = dao.findMoviesByName("gers");
-		Movie m1 = new Movie("The Avengers");
-		assertTrue(movies1.contains(m1));
+		assertTrue(dao.findMoviesByName("gers").contains(new Movie("The Avengers")));
 		
 		//Check if movie doesn't exist
-		Set<Movie> movies2 = dao.findMoviesByName("");
-		Movie m2 = new Movie("Test");
-		assertFalse(movies2.contains(m2));
+		Set<Movie> movies = dao.findMoviesByName("");
+		assertFalse(movies.contains(new Movie("Test")));
+		
+		//Check if movie exist
+		assertTrue(movies.contains(new Movie("Thor")));
+		assertTrue(movies.contains(new Movie("The Incredible Hulk")));
+		assertTrue(movies.contains(new Movie("Captain America: Civil War")));
 	}
 
 
