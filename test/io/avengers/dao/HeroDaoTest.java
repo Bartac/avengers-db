@@ -40,7 +40,7 @@ public class HeroDaoTest {
 	@Test
 	public void testFindHeroesByName() throws SQLException {
 		// Check if hero name Hulk exist 
-		assertTrue(dao.findHeroesByName("ulk").contains(new Hero("Hulk")));
+		assertTrue(dao.findHeroesByName("cap").contains(new Hero("Captain America")));
 		
 		//Check if a hero doesn't exist
 		Set<Hero> heroes = dao.findHeroesByName("");
