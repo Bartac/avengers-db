@@ -1,5 +1,6 @@
 package io.avengers.dao;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -12,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import io.avengers.domain.Hero;
+import io.avengers.domain.Movie;
 
 public class HeroDaoTest {
 
@@ -30,26 +32,24 @@ public class HeroDaoTest {
 	}
 
 	@Test
-	public void testHeroDAO() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	public void testFindAll() throws SQLException {
+		// Test if contains DB
 		assertTrue(dao.findAll().size() > 5);
 	}
 
 	@Test
 	public void testFindHeroesByName() throws SQLException {
-		//Set<Hero> hero = dao.findHeroesByName("Hulk");
-		Hero hero = new Hero("Hulk");
+		// Check if hero name Hulk exist 
+		assertTrue(dao.findHeroesByName("ulk").contains(new Hero("Hulk")));
 		
-		assertTrue(dao.findHeroesByName("ulk").contains(hero));
-		System.out.println(dao.findHeroesByName(""));
+		//Check if a hero doesn't exist
+		Set<Hero> heroes = dao.findHeroesByName("");
+		assertFalse(heroes.contains(new Hero("Patateman")));
+		
+		//Check if a hero exist
+		assertTrue(heroes.contains(new Hero("Ironman")));
+		assertTrue(heroes.contains(new Hero("Captain America")));
+		assertTrue(heroes.contains(new Hero("loki")));
 	}
 
-	@Test
-	public void testResultSetToHero() {
-		fail("Not yet implemented");
-	}
 }
