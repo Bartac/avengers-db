@@ -43,12 +43,11 @@ public class TeamDaoTest {
 				
 		//Check if movie doesn't exist
 		Set<Team> team = dao.findTeamByName("");
-		//assertFalse(team.contains(new Team("Test")));
+		assertFalse(team.contains(new Team("Test")));
 				
 		//Check if movie exist
-		/*assertTrue(movies.contains(new Movie("Thor")));
-		assertTrue(movies.contains(new Movie("The Incredible Hulk")));
-		assertTrue(movies.contains(new Movie("Captain America: Civil War")));*/
+		assertTrue(team.contains(new Team("Avengers")));
+		assertTrue(team.contains(new Team("Xmen")));
 	}
 
 	@Test

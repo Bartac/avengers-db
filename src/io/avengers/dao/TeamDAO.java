@@ -17,7 +17,10 @@ public class TeamDAO extends MarvelDAO{
 	
 	public Set<Team> findAll() throws SQLException {
 
-		String query = "SELECT * FROM `team`";
+		String query = "SELECT t.team_id, t.team_name, t.history, t.picture AS team_picture, h.name AS hero_name, h.picture AS hero_picture "
+				+ "FROM team t LEFT JOIN team_hero th ON t.team_id = th.team_id "
+				+ "LEFT JOIN heroes h ON th.hero_id = h.id "
+				+ "WHERE t.team_name LIKE '%%'";
 
 		Connection connect = connectToMySQL();
 		Statement statement = connect.createStatement();
@@ -36,8 +39,10 @@ public class TeamDAO extends MarvelDAO{
 	
 	public Set<Team> findTeamByName(String term) throws SQLException {
 		
-		String query = "SELECT t.team_name, t.history, t.picture, h.name, h.picture FROM team t INNER JOIN team_hero th ON t.team_id = th.team_id " 
- + "INNER JOIN heroes h ON th.hero_id = h.id WHERE t.team_name LIKE '%"+term+"%'";
+		String query = "SELECT t.team_id, t.team_name, t.history, t.picture AS team_picture, h.name AS hero_name, h.picture AS hero_picture "
+				+ "FROM team t LEFT JOIN team_hero th ON t.team_id = th.team_id "
+				+ "LEFT JOIN heroes h ON th.hero_id = h.id "
+				+ "WHERE t.team_name LIKE '%"+term+"%'";
 
 		Connection connect = connectToMySQL();
 		Statement statement = connect.createStatement();
@@ -57,10 +62,12 @@ public class TeamDAO extends MarvelDAO{
 
 		try {
 			int id = resultSet.getInt("team_id");
-			String name = resultSet.getString("team_name");
-			byte[] picture = resultSet.getBytes("picture");
+			String team_name = resultSet.getString("team_name");
 			String history = resultSet.getString("history");
-			Team t = new Team(id,name,picture,history);
+			byte[] team_picture = resultSet.getBytes("team_picture");
+			String heroes_name = resultSet.getString("hero_name");
+			byte[] heroes_picture = resultSet.getBytes("hero_picture");
+			Team t = new Team(id, team_name, team_picture, history, heroes_name, heroes_picture);
 			return t;
 
 		} catch (SQLException e) {

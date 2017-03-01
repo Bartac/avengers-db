@@ -2,24 +2,24 @@ package io.avengers.domain;
 
 public class Team {
 	int id;
-	String name;
-	byte[] picture;
+	String team_name;
+	byte[] team_picture;
 	String history;
+	String heroes_name;
+	byte[] heroes_picture;
 	
-	public Team(String name) {
-		this.name = name;
+	public Team(String team_name) {
+		this.team_name = team_name;
 	}
 
-	public Team(int id, String name, byte[] picture, String history) {
+	public Team(int id, String team_name, byte[] team_picture, String history, String heroes_name,
+			byte[] heroes_picture) {
 		this.id = id;
-		this.name = name;
-		this.picture = picture;
+		this.team_name = team_name;
+		this.team_picture = team_picture;
 		this.history = history;
-	}
-
-	@Override
-	public String toString() {
-		return this.name;
+		this.heroes_name = heroes_name;
+		this.heroes_picture = heroes_picture;
 	}
 
 	public int getId() {
@@ -30,20 +30,20 @@ public class Team {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getTeam_name() {
+		return team_name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setTeam_name(String team_name) {
+		this.team_name = team_name;
 	}
 
-	public byte[] getPicture() {
-		return picture;
+	public byte[] getTeam_picture() {
+		return team_picture;
 	}
 
-	public void setPicture(byte[] picture) {
-		this.picture = picture;
+	public void setTeam_picture(byte[] team_picture) {
+		this.team_picture = team_picture;
 	}
 
 	public String getHistory() {
@@ -54,11 +54,27 @@ public class Team {
 		this.history = history;
 	}
 
+	public String getHeroes_name() {
+		return heroes_name;
+	}
+
+	public void setHeroes_name(String heroes_name) {
+		this.heroes_name = heroes_name;
+	}
+
+	public byte[] getHeroes_picture() {
+		return heroes_picture;
+	}
+
+	public void setHeroes_picture(byte[] heroes_picture) {
+		this.heroes_picture = heroes_picture;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((team_name == null) ? 0 : team_name.hashCode());
 		return result;
 	}
 
@@ -71,13 +87,15 @@ public class Team {
 		if (getClass() != obj.getClass())
 			return false;
 		Team other = (Team) obj;
-		if (name == null) {
-			if (other.name != null)
+		if (team_name == null) {
+			if (other.team_name != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!team_name.equals(other.team_name))
 			return false;
 		return true;
 	}
-	
+
+
+
 
 }
