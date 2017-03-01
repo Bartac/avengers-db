@@ -5,6 +5,10 @@ public class Team {
 	String name;
 	byte[] picture;
 	String history;
+	
+	public Team(String name) {
+		this.name = name;
+	}
 
 	public Team(int id, String name, byte[] picture, String history) {
 		this.id = id;
@@ -49,5 +53,31 @@ public class Team {
 	public void setHistory(String history) {
 		this.history = history;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Team other = (Team) obj;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+	
 
 }

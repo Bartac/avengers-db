@@ -36,7 +36,8 @@ public class TeamDAO extends MarvelDAO{
 	
 	public Set<Team> findTeamByName(String term) throws SQLException {
 		
-		String query = "SELECT team_id,name,picture,history FROM `team` WHERE name = '"+term+"'";
+		String query = "SELECT t.team_name, t.history, t.picture, h.name, h.picture FROM team t INNER JOIN team_hero th ON t.team_id = th.team_id " 
+ + "INNER JOIN heroes h ON th.hero_id = h.id WHERE t.team_name LIKE '%"+term+"%'";
 
 		Connection connect = connectToMySQL();
 		Statement statement = connect.createStatement();
@@ -56,7 +57,7 @@ public class TeamDAO extends MarvelDAO{
 
 		try {
 			int id = resultSet.getInt("team_id");
-			String name = resultSet.getString("name");
+			String name = resultSet.getString("team_name");
 			byte[] picture = resultSet.getBytes("picture");
 			String history = resultSet.getString("history");
 			Team t = new Team(id,name,picture,history);

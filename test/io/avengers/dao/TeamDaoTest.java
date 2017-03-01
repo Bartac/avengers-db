@@ -1,16 +1,19 @@
 package io.avengers.dao;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Set;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import io.avengers.dao.TeamDAO;
+import io.avengers.domain.Movie;
+import io.avengers.domain.Team;
 
 public class TeamDaoTest {
 
@@ -30,12 +33,22 @@ public class TeamDaoTest {
 
 	@Test
 	public void testFindAll() throws SQLException {
-		assertTrue(dao.findAll().size() > 0);
+		assertTrue(dao.findAll().size() > 1);
 	}
 
 	@Test
-	public void testFindTeamByName() {
-		fail("Not yet implemented");
+	public void testFindTeamByName() throws SQLException {
+		// Check if movie name avengers exist
+		assertTrue(dao.findTeamByName("gers").contains(new Team("Avengers")));
+				
+		//Check if movie doesn't exist
+		Set<Team> team = dao.findTeamByName("");
+		//assertFalse(team.contains(new Team("Test")));
+				
+		//Check if movie exist
+		/*assertTrue(movies.contains(new Movie("Thor")));
+		assertTrue(movies.contains(new Movie("The Incredible Hulk")));
+		assertTrue(movies.contains(new Movie("Captain America: Civil War")));*/
 	}
 
 	@Test
