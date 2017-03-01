@@ -18,9 +18,10 @@ public class MovieDAO extends MarvelDAO {
 
 	public Set<Movie> findAll() throws SQLException {
 
-		String query = "SELECT * FROM `heroes`";
+		String query = "SELECT m.id, m.name, h.name AS hero_name, m.picture, m.history, m.date "
+				+ "FROM movie_hero mh JOIN heroes h ON mh.id_hero=h.id JOIN movie m ON m.id=mh.id_movie "
+				+ "WHERE m.name LIKE '%%'";
 
-		// 3306 no password
 		Connection connect = connectToMySQL();
 
 		Statement statement = connect.createStatement();
@@ -37,10 +38,10 @@ public class MovieDAO extends MarvelDAO {
 	}
 
 	public Set<Movie> findMoviesByName(String term) throws SQLException {
-		String query = "SELECT m.id, m.name, h.name, m.picture, m.history, m.date FROM movie_hero mh JOIN heroes h ON mh.id_hero=h.id"
-				+ " JOIN movie m ON m.id=mh.id_movie WHERE m.name LIKE '%" + term +"%'";
+		String query = "SELECT m.id, m.name, h.name AS hero_name, m.picture, m.history, m.date "
+				+ "FROM movie_hero mh JOIN heroes h ON mh.id_hero=h.id JOIN movie m ON m.id=mh.id_movie "
+				+ "WHERE m.name LIKE '%"+term+"%'";
 
-		// 3306 no password
 		Connection connect = connectToMySQL();
 
 		Statement statement = connect.createStatement();
@@ -62,9 +63,10 @@ public class MovieDAO extends MarvelDAO {
 			String name = resultSet.getString("name");
 			byte[] picture = resultSet.getBytes("picture");
 			String history = resultSet.getString("history");
-			Date date = new Date(2123);
-
-			Movie m = new Movie(id, name, picture, history, date);
+			Date date = resultSet.getDate("date");
+			String heroName = resultSet.getString("hero_name");
+			
+			Movie m = new Movie(id, name, picture, history, date,heroName);
 
 			return m;
 		} catch (SQLException e) {
