@@ -42,9 +42,9 @@ public class HeroDaoTest {
 	@Test
 	public void testFindHeroesByName() throws SQLException {
 		//Set<Hero> hero = dao.findHeroesByName("Hulk");
-		Hero hero = new Hero("Antman");
+		Hero hero = new Hero("Hulk");
 		
-		assertTrue(dao.findHeroesByName("man").contains(hero));
+		assertTrue(dao.findHeroesByName("ulk").contains(hero));
 	}
 
 	@Test
