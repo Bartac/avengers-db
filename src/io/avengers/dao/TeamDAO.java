@@ -11,6 +11,9 @@ import io.avengers.domain.Team;
 
 public class TeamDAO extends MarvelDAO{
 	
+	public TeamDAO() {
+		super();
+	}
 	
 	public Set<Team> findAll() throws SQLException {
 
