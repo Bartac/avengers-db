@@ -1,25 +1,33 @@
 package io.avengers.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Team {
 	int id;
 	String team_name;
 	byte[] team_picture;
 	String history;
-	String heroes_name;
-	byte[] heroes_picture;
+	List<String> heroes_name = new ArrayList<>();
+	List<byte[]> heroes_picture = new ArrayList<>();
 	
 	public Team(String team_name) {
 		this.team_name = team_name;
 	}
 
-	public Team(int id, String team_name, byte[] team_picture, String history, String heroes_name,
-			byte[] heroes_picture) {
+	public Team(int id, String team_name, byte[] team_picture, String history, 	List<String> heroes_name,
+			List<byte[]> heroes_picture) {
 		this.id = id;
 		this.team_name = team_name;
 		this.team_picture = team_picture;
 		this.history = history;
-		this.heroes_name = heroes_name;
-		this.heroes_picture = heroes_picture;
+		this.heroes_name.addAll(heroes_name);
+		this.heroes_picture.addAll(heroes_picture);
+	}
+	
+	@Override
+	public String toString() {
+		return this.team_name +" : "+ this.heroes_name;
 	}
 
 	public int getId() {
@@ -54,20 +62,22 @@ public class Team {
 		this.history = history;
 	}
 
-	public String getHeroes_name() {
-		return heroes_name;
-	}
-
-	public void setHeroes_name(String heroes_name) {
-		this.heroes_name = heroes_name;
-	}
-
-	public byte[] getHeroes_picture() {
+	
+	
+	public List<byte[]> getHeroes_picture() {
 		return heroes_picture;
 	}
 
-	public void setHeroes_picture(byte[] heroes_picture) {
+	public void setHeroes_picture(List<byte[]> heroes_picture) {
 		this.heroes_picture = heroes_picture;
+	}
+
+	public List<String> getHeroes_name() {
+		return heroes_name;
+	}
+
+	public void setHeroes_name(List<String> heroes_name) {
+		this.heroes_name = heroes_name;
 	}
 
 	@Override

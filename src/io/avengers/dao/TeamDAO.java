@@ -4,23 +4,24 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import io.avengers.domain.Team;
 
-public class TeamDAO extends MarvelDAO{
-	
+public class TeamDAO extends MarvelDAO {
+
 	public TeamDAO() {
 		super();
 	}
-	
+
 	public Set<Team> findAll() throws SQLException {
 
 		String query = "SELECT t.team_id, t.team_name, t.history, t.picture AS team_picture, h.name AS hero_name, h.picture AS hero_picture "
 				+ "FROM team t LEFT JOIN team_hero th ON t.team_id = th.team_id "
-				+ "LEFT JOIN heroes h ON th.hero_id = h.id "
-				+ "WHERE t.team_name LIKE '%%'";
+				+ "LEFT JOIN heroes h ON th.hero_id = h.id " + "WHERE t.team_name LIKE '%%'";
 
 		Connection connect = connectToMySQL();
 		Statement statement = connect.createStatement();
@@ -34,15 +35,13 @@ public class TeamDAO extends MarvelDAO{
 		connect.close();
 		return team;
 
-
 	}
-	
+
 	public Set<Team> findTeamByName(String term) throws SQLException {
-		
+
 		String query = "SELECT t.team_id, t.team_name, t.history, t.picture AS team_picture, h.name AS hero_name, h.picture AS hero_picture "
 				+ "FROM team t LEFT JOIN team_hero th ON t.team_id = th.team_id "
-				+ "LEFT JOIN heroes h ON th.hero_id = h.id "
-				+ "WHERE t.team_name LIKE '%"+term+"%'";
+				+ "LEFT JOIN heroes h ON th.hero_id = h.id " + "WHERE t.team_name LIKE '%" + term + "%'";
 
 		Connection connect = connectToMySQL();
 		Statement statement = connect.createStatement();
@@ -52,21 +51,35 @@ public class TeamDAO extends MarvelDAO{
 		while (resultSet.next()) {
 			team.add(resultSetToTeam(resultSet));
 		}
-		
+
 		connect.close();
 		return team;
 	}
-	
-	
+
 	Team resultSetToTeam(ResultSet resultSet) {
 
 		try {
+			List<String> heroes_name = new ArrayList<>();
+			List<byte[]> heroes_picture = new ArrayList<>();
+
 			int id = resultSet.getInt("team_id");
 			String team_name = resultSet.getString("team_name");
 			String history = resultSet.getString("history");
 			byte[] team_picture = resultSet.getBytes("team_picture");
-			String heroes_name = resultSet.getString("hero_name");
-			byte[] heroes_picture = resultSet.getBytes("hero_picture");
+			heroes_name.add(resultSet.getString("hero_name"));
+			heroes_picture.add(resultSet.getBytes("hero_picture"));
+
+			while (resultSet.next()) {
+				if (id == resultSet.getInt("team_id")) {
+					heroes_name.add(resultSet.getString("hero_name"));
+					heroes_picture.add(resultSet.getBytes("hero_picture"));
+				} else {
+					Team t = new Team(id, team_name, team_picture, history, heroes_name, heroes_picture);
+					resultSet.previous();
+					return t;
+				}
+			}
+
 			Team t = new Team(id, team_name, team_picture, history, heroes_name, heroes_picture);
 			return t;
 

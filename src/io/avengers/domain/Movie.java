@@ -23,7 +23,11 @@ public class Movie {
 		this.name = name;
 	}
 
-	
+	@Override
+	public String toString() {
+		return this.name + " - " + this.hero;
+	}
+
 	public int getId() {
 		return id;
 	}
