@@ -32,7 +32,7 @@ public class AvengersFrame extends JFrame {
 	 */
 	public AvengersFrame() throws Exception {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 200, 400);
+		setBounds(100, 100, 800, 800);
 		heroPanel = new HeroPanel();
 		heroPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		//heroPanel.setLayout(new BorderLayout(0, 0));
