@@ -23,6 +23,11 @@ public class Hero {
 		this.team_name = team_name;
 		this.real_name = real_name;
 	}
+	
+	@Override
+	public String toString() {
+		return this.name;
+	}
 
 	public Hero(String name) {
 		super();
