@@ -61,6 +61,7 @@ public class MovieDAO extends MarvelDAO {
 		try {
 			List<String> heroes_name = new ArrayList<>();
 
+			// Get movies parameters from query
 			int id = resultSet.getInt("id");
 			String name = resultSet.getString("name");
 			byte[] picture = resultSet.getBytes("picture");
@@ -68,10 +69,14 @@ public class MovieDAO extends MarvelDAO {
 			Date date = resultSet.getDate("date");
 			heroes_name.add(resultSet.getString("hero_name"));
 
+			// If the next row have the same movie_id, add the next hero to the
+			// list of heroes for this movie
 			while (resultSet.next()) {
 				if (id == resultSet.getInt("id")) {
 					heroes_name.add(resultSet.getString("hero_name"));
 				} else {
+					// If the next row doesn't have the same movie_id, return
+					// the movie and set the previous row of the query
 					resultSet.previous();
 					Movie m = new Movie(id, name, picture, history, date, heroes_name);
 					return m;

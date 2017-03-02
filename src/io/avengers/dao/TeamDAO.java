@@ -62,6 +62,7 @@ public class TeamDAO extends MarvelDAO {
 			List<String> heroes_name = new ArrayList<>();
 			List<byte[]> heroes_picture = new ArrayList<>();
 
+			// Get team parameters from query
 			int id = resultSet.getInt("team_id");
 			String team_name = resultSet.getString("team_name");
 			String history = resultSet.getString("history");
@@ -69,11 +70,16 @@ public class TeamDAO extends MarvelDAO {
 			heroes_name.add(resultSet.getString("hero_name"));
 			heroes_picture.add(resultSet.getBytes("hero_picture"));
 
+			// If the next row have the same team_id, add the next hero and
+			// picture to the
+			// list of heroes and picture for this team
 			while (resultSet.next()) {
 				if (id == resultSet.getInt("team_id")) {
 					heroes_name.add(resultSet.getString("hero_name"));
 					heroes_picture.add(resultSet.getBytes("hero_picture"));
 				} else {
+					// If the next row doesn't have the same team_id, return
+					// the team and set the previous row of the query
 					Team t = new Team(id, team_name, team_picture, history, heroes_name, heroes_picture);
 					resultSet.previous();
 					return t;

@@ -49,9 +49,5 @@ public class TeamDaoTest {
 		assertTrue(team.contains(new Team("Xmen")));
 	}
 
-	@Test
-	public void testResultSetToTeam() {
-		fail("Not yet implemented");
-	}
 
 }
