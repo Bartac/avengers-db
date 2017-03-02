@@ -1,5 +1,8 @@
 package io.avengers.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Hero {
 	int id;
 	String name;
@@ -7,11 +10,11 @@ public class Hero {
 	byte[] picture;
 	String abilities;
 	String history;
-	String movies_name;
+	List<String> movies_name = new ArrayList<>();
 	String team_name;
 	String real_name;
 
-	public Hero(int id, String name, Sex sex, byte[] picture, String abilities, String history, String movies_name,
+	public Hero(int id, String name, Sex sex, byte[] picture, String abilities, String history, List<String> movies_name,
 			String team_name, String real_name) {
 		this.id = id;
 		this.name = name;
@@ -19,14 +22,14 @@ public class Hero {
 		this.picture = picture;
 		this.abilities = abilities;
 		this.history = history;
-		this.movies_name = movies_name;
+		this.movies_name.addAll(movies_name);
 		this.team_name = team_name;
 		this.real_name = real_name;
 	}
 	
 	@Override
 	public String toString() {
-		return this.name;
+		return this.name +" - "+ this.movies_name;
 	}
 
 	public Hero(String name) {
@@ -82,11 +85,11 @@ public class Hero {
 		this.history = history;
 	}
 
-	public String getMovies_name() {
+	public List<String> getMovies_name() {
 		return movies_name;
 	}
 
-	public void setMovies_name(String movies_name) {
+	public void setMovies_name(List<String> movies_name) {
 		this.movies_name = movies_name;
 	}
 

@@ -1,5 +1,6 @@
 package io.avengers.ui;
 
+import io.avengers.service.HeroService;
 import io.avengers.service.MovieService;
 import io.avengers.service.TeamService;
 
@@ -11,5 +12,8 @@ public class TestApplication {
 		
 		MovieService mService = new MovieService();
 		System.out.println(mService.findAll());
+		
+		HeroService hService = new HeroService();
+		System.out.println(hService.findAll());
 	}
 }
