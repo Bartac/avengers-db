@@ -1,7 +1,6 @@
 package io.avengers.ui;
 
-import java.awt.FlowLayout;
-import java.util.List;
+import java.awt.GridLayout;
 import java.util.Set;
 
 import javax.swing.BoxLayout;
@@ -26,35 +25,35 @@ public class HeroPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public HeroPanel() {
-		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-
-		name = new JPanel();
-		add(name);
-		name.setLayout(new BoxLayout(name, BoxLayout.Y_AXIS));
-
-		lblName = new JLabel("Name");
-		name.add(lblName);
-
-		sex = new JPanel();
-		add(sex);
-		sex.setLayout(new BoxLayout(sex, BoxLayout.Y_AXIS));
-
-		lblName1 = new JLabel("Sex");
-		sex.add(lblName1);
-
-		realname = new JPanel();
-		add(realname);
-		realname.setLayout(new BoxLayout(realname, BoxLayout.Y_AXIS));
-
-		lblName2 = new JLabel("Real Name");
-		realname.add(lblName2);
 
 		moviename = new JPanel();
-		add(moviename);
 		moviename.setLayout(new BoxLayout(moviename, BoxLayout.Y_AXIS));
 
 		lblName3 = new JLabel("Movies");
 		moviename.add(lblName3);
+		setLayout(new GridLayout(0, 5, 0, 0));
+
+		name = new JPanel();
+		name.setLayout(new BoxLayout(name, BoxLayout.Y_AXIS));
+
+		lblName = new JLabel("Name");
+		name.add(lblName);
+		add(name);
+
+		sex = new JPanel();
+		sex.setLayout(new BoxLayout(sex, BoxLayout.Y_AXIS));
+
+		lblName1 = new JLabel("Sex");
+		sex.add(lblName1);
+		add(sex);
+
+		realname = new JPanel();
+		realname.setLayout(new BoxLayout(realname, BoxLayout.Y_AXIS));
+
+		lblName2 = new JLabel("Real Name");
+		realname.add(lblName2);
+		add(realname);
+		add(moviename);
 
 		teamname = new JPanel();
 		add(teamname);
@@ -70,8 +69,6 @@ public class HeroPanel extends JPanel {
 		for (Hero h : heroes) {
 			for (String s : h.getMovies_name()) {
 
-
-
 				if (h.getName() == tmp.getName()) {
 					getPanel().add(new JLabel("-"));
 					getSex().add(new JLabel("-"));
@@ -84,7 +81,7 @@ public class HeroPanel extends JPanel {
 					getRealname().add(new JLabel("-"));
 				} else {
 					getRealname().add(new JLabel(h.getReal_name()));
-					
+
 				}
 
 				if (s == null) {
