@@ -55,6 +55,20 @@ public class MovieDAO extends MarvelDAO {
 		connect.close();
 		return movies;
 	}
+	
+	public Movie findMoviesById(String term) throws SQLException {
+		String query = "SELECT m.id, m.name, h.name AS hero_name, m.picture, m.history, m.date "
+				+ "FROM movie_hero mh JOIN heroes h ON mh.id_hero=h.id "
+				+ "JOIN movie m ON m.id=mh.id_movie WHERE m.id='" + term + "%' ORDER BY m.id";
+
+		Connection connect = connectToMySQL();
+		Statement statement = connect.createStatement();
+		ResultSet resultSet = statement.executeQuery(query);
+		resultSet.next();
+		Movie movie = resultSetToMovie(resultSet);
+		connect.close();
+		return movie;
+	}
 
 	Movie resultSetToMovie(ResultSet resultSet) {
 

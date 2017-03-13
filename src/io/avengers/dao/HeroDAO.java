@@ -71,9 +71,9 @@ public class HeroDAO extends MarvelDAO {
 		Statement statement = connect.createStatement();
 		ResultSet resultSet = statement.executeQuery(query);
 		resultSet.next();
+		Hero hero = resultSetToHero(resultSet);
 		connect.close();
-		
-		return resultSetToHero(resultSet);
+		return hero;
 	}
 	Hero resultSetToHero(ResultSet resultSet) {
 

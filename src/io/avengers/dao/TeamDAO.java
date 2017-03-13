@@ -31,7 +31,6 @@ public class TeamDAO extends MarvelDAO {
 		while (resultSet.next()) {
 			team.add(resultSetToTeam(resultSet));
 		}
-
 		connect.close();
 		return team;
 
@@ -55,7 +54,23 @@ public class TeamDAO extends MarvelDAO {
 		connect.close();
 		return team;
 	}
+	
+	public Team findTeamById(String term) throws SQLException {
 
+		String query = "SELECT t.team_id, t.team_name, t.history, t.picture AS team_picture, h.name AS hero_name, h.picture AS hero_picture "
+				+ "FROM team t LEFT JOIN team_hero th ON t.team_id = th.team_id "
+				+ "LEFT JOIN heroes h ON th.hero_id = h.id " + "WHERE t.team_id='"+ term + "'";
+
+		Connection connect = connectToMySQL();
+		Statement statement = connect.createStatement();
+		ResultSet resultSet = statement.executeQuery(query);
+		resultSet.next();
+		Team team = resultSetToTeam(resultSet);
+		connect.close();
+		return team;
+	}
+	
+	
 	Team resultSetToTeam(ResultSet resultSet) {
 
 		try {

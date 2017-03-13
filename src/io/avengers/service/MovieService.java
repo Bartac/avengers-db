@@ -38,4 +38,24 @@ public class MovieService {
 			throw stateException;
 		}
 	}
+	
+	public Movie findMoviesById(String term) {
+
+		// Guards
+		if (term == null) {
+			System.out.println("Potential Bug or illegal requesta");
+			return null;
+		}
+		if (term.isEmpty()) {
+			return null;
+		}
+
+		// Method
+		try {
+			return new MovieDAO().findMoviesById(term);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw stateException;
+		}
+	}
 }

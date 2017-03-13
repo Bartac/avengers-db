@@ -34,5 +34,22 @@ public class TeamService {
 		}
 		
 	}
+	
+	public Team findTeamById(String term) {
+		if (term == null) {
+			System.out.println("Potential bug or illegal request ");
+			return null;
+		}
+		if (term.isEmpty()) {
+			return null;
+		}
+		try {
+			return new TeamDAO().findTeamById(term);
+		} catch (SQLException e) {
+			throw stateException;
+		}
+		
+	}
+
 
 }
