@@ -59,4 +59,15 @@ public class HeroService {
 			throw stateException;
 		}
 	}
+	
+	public void addHeroToTeam(String team_name, String hero_name){
+		if(hero_name == null || team_name == null){
+			System.out.println("name or team inex");
+		}
+		try {
+			new HeroDAO().addHeroToTeam(team_name,hero_name);
+		} catch (SQLException e) {
+			throw stateException;
+		}
+	}
 }

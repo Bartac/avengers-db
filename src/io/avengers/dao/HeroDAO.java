@@ -12,6 +12,9 @@ import java.util.Set;
 
 import io.avengers.domain.Hero;
 import io.avengers.domain.Sex;
+import io.avengers.domain.Team;
+import io.avengers.service.HeroService;
+import io.avengers.service.TeamService;
 
 public class HeroDAO extends MarvelDAO {
 
@@ -133,6 +136,29 @@ public class HeroDAO extends MarvelDAO {
 		statementirl.setInt(1, id);
 		statementirl.setString(2, realname);
 		statementirl.execute();
+		
+		connect.close();
+	}
+	
+	public void addHeroToTeam(String team_name, String hero_name) throws SQLException{
+		
+		TeamService team = new TeamService();
+		Team t = team.findTeamByName(team_name).iterator().next();
+		int id_team = t.getId();
+		System.out.println(id_team);
+		
+		HeroService hero = new HeroService();
+		Hero h = hero.findHeroesByName(hero_name).iterator().next();
+		int id_hero = h.getId();
+		System.out.println(id_hero);
+		
+		String query = "INSERT INTO `team_hero` (`team_id`, `hero_id`) VALUES (?, ?)";
+		Connection connect = connectToMySQL();
+		PreparedStatement statementirl = connect.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+		statementirl.setInt(1, id_team);
+		statementirl.setInt(2, id_hero);
+		statementirl.execute();
+		
 		connect.close();
 	}
 }
