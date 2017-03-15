@@ -112,7 +112,7 @@ public class HeroDAO extends MarvelDAO {
 		}
 	}
 	
-	public void createHero(String name) throws SQLException{
+	public void createHero(String name, String realname) throws SQLException{
 		
 		String query = "INSERT INTO `heroes` (`name`, `sex`, `likes`, `dislikes`, `picture`, `abilities`, `history`) VALUES (?, '', '0', '0', NULL, NULL, NULL)";
 		Connection connect = connectToMySQL();
@@ -127,6 +127,12 @@ public class HeroDAO extends MarvelDAO {
 		}
 		
 		System.out.println("id " + id);
+		
+		String queryirl = "INSERT INTO `irl` (`hero_id`, `name`) VALUES (?,?)";
+		PreparedStatement statementirl = connect.prepareStatement(queryirl, Statement.RETURN_GENERATED_KEYS);
+		statementirl.setInt(1, id);
+		statementirl.setString(2, realname);
+		statementirl.execute();
 		connect.close();
 	}
 }

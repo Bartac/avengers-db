@@ -49,12 +49,12 @@ public class HeroService {
 		}
 	}
 	
-	public void createHero(String name){
-		if(name == null){
+	public void createHero(String name,String realname){
+		if(name == null || realname == null){
 			System.out.println("name inex");
 		}
 		try {
-			new HeroDAO().createHero(name);
+			new HeroDAO().createHero(name,realname);
 		} catch (SQLException e) {
 			throw stateException;
 		}
