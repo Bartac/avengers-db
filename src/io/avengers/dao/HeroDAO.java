@@ -144,6 +144,7 @@ public class HeroDAO extends MarvelDAO {
 		statementirl.execute();
 		
 		connect.close();
+		
 	}
 	
 	public void addHeroToTeam(String team_name, String hero_name) throws SQLException{
