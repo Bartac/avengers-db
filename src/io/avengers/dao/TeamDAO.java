@@ -1,6 +1,7 @@
 package io.avengers.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -107,5 +108,23 @@ public class TeamDAO extends MarvelDAO {
 		} catch (SQLException e) {
 			throw new IllegalStateException("DataBase has move: " + e.getMessage());
 		}
+	}
+	
+	public void createTeam(String team_name) throws SQLException{
+		
+		String query = "INSERT INTO `team` (`team_id`, `team_name`, `picture`, `history`) VALUES (NULL,?, NULL, NULL)";
+		Connection connect = connectToMySQL();
+		PreparedStatement statement = connect.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+		statement.setString(1, team_name);
+		statement.execute();
+		
+		ResultSet rs = statement.getGeneratedKeys();
+		int id = -1;
+		if(rs.next()){
+			id = rs.getInt(1);
+		}
+		
+		System.out.println("id " + id);
+		connect.close();
 	}
 }
