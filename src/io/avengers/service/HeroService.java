@@ -84,4 +84,12 @@ public class HeroService {
 			throw stateException;
 		}
 	}
+	
+	public void addHeroToMovie(int id_movie, int id_hero){
+		try {
+			new HeroDAO().addHeroToMovie(id_movie,id_hero);
+		} catch (SQLException e) {
+			throw stateException;
+		}
+	}
 }

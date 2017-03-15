@@ -11,9 +11,11 @@ import java.util.List;
 import java.util.Set;
 
 import io.avengers.domain.Hero;
+import io.avengers.domain.Movie;
 import io.avengers.domain.Sex;
 import io.avengers.domain.Team;
 import io.avengers.service.HeroService;
+import io.avengers.service.MovieService;
 import io.avengers.service.TeamService;
 
 public class HeroDAO extends MarvelDAO {
@@ -169,16 +171,39 @@ public class HeroDAO extends MarvelDAO {
 	}
 	
 	public void deleteHero(int id) throws SQLException{
-		String query = "DELETE FROM `irl` WHERE hero_id=?";
+		
+		Connection connect = connectToMySQL();
+		String queryTeam = "DELETE FROM `team_hero` WHERE id_hero=?";
+		PreparedStatement staTeam = connect.prepareStatement(queryTeam, Statement.RETURN_GENERATED_KEYS);
+		staTeam.setInt(1, id);
+		staTeam.execute();
+		
+		String queryMovie = "DELETE FROM `movie_hero` WHERE hero_id=?";
+		PreparedStatement staMovie = connect.prepareStatement(queryMovie, Statement.RETURN_GENERATED_KEYS);
+		staMovie.setInt(1, id);
+		staMovie.execute();
+		
+		String queryIrl = "DELETE FROM `irl` WHERE hero_id=?";
+		PreparedStatement staIrl = connect.prepareStatement(queryIrl, Statement.RETURN_GENERATED_KEYS);
+		staIrl.setInt(1, id);
+		staIrl.execute();
+		
+		String queryHero = "DELETE FROM `heroes` WHERE id =?";
+		PreparedStatement staHero = connect.prepareStatement(queryHero, Statement.RETURN_GENERATED_KEYS);
+		staHero.setInt(1, id);
+		staHero.execute();
+		connect.close();
+	}
+	
+	public void addHeroToMovie(int id_movie,int id_hero) throws SQLException{
+		
+		String query = "INSERT INTO `movie_hero` (`id_movie`, `id_hero`) VALUES (?, ?)";
 		Connection connect = connectToMySQL();
 		PreparedStatement statement = connect.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-		statement.setInt(1, id);
+		statement.setInt(1, id_movie);
+		statement.setInt(2, id_hero);
 		statement.execute();
 		
-		String query2 = "DELETE FROM `heroes` WHERE id =?";
-		PreparedStatement statement2 = connect.prepareStatement(query2, Statement.RETURN_GENERATED_KEYS);
-		statement2.setInt(1, id);
-		statement2.execute();
-		connect.close();
+		
 	}
 }
