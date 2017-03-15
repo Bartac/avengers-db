@@ -1,6 +1,7 @@
 package io.avengers.service;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.Set;
 
 import io.avengers.dao.MovieDAO;
@@ -57,5 +58,25 @@ public class MovieService {
 			e.printStackTrace();
 			throw stateException;
 		}
+	}
+	
+	public void createMovie(String movie_name){
+		//Guards
+		
+		if (movie_name.isEmpty()){
+			System.out.println("Potential Bug or illegal requesta");
+			return;
+		}
+		
+		// Method
+		try {
+			new MovieDAO().createMovie(movie_name);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw stateException;
+		}
+		
+		
+		
 	}
 }

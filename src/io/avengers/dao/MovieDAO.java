@@ -1,7 +1,8 @@
 package io.avengers.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.util.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -103,4 +104,15 @@ public class MovieDAO extends MarvelDAO {
 			throw new IllegalStateException("DataBase has move: " + e.getMessage());
 		}
 	}
+	
+	public void createMovie(String movie_name) throws SQLException  {
+		String query = "INSERT INTO `movie` (`name`) VALUES (?)";
+		Connection connect = connectToMySQL();
+		PreparedStatement statement = connect.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+		statement.setString(1, movie_name);
+		statement.execute();
+		connect.close();
+	}
+	
+	
 }

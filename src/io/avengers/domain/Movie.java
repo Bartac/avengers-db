@@ -11,6 +11,10 @@ public class Movie {
 	String history;
 	Date date;
 	List<String> heroes_name = new ArrayList<>();
+	
+	public Movie() {
+		
+	}
 
 	public Movie(int id, String name, byte[] picture, String history, Date date, List<String> heroes_name) {
 		this.id = id;
