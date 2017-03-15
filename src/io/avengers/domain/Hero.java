@@ -14,6 +14,10 @@ public class Hero {
 	String team_name;
 	String real_name;
 
+	public Hero(){
+		
+	}
+	
 	public Hero(int id, String name, Sex sex, byte[] picture, String abilities, String history, List<String> movies_name,
 			String team_name, String real_name) {
 		this.id = id;

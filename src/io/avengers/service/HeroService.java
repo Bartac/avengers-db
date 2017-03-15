@@ -48,4 +48,15 @@ public class HeroService {
 			throw stateException;
 		}
 	}
+	
+	public void createHero(String name){
+		if(name == null){
+			System.out.println("name inex");
+		}
+		try {
+			new HeroDAO().createHero(name);
+		} catch (SQLException e) {
+			throw stateException;
+		}
+	}
 }
