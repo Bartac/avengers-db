@@ -3,6 +3,7 @@ package io.avengers.service;
 import java.sql.SQLException;
 import java.util.Set;
 
+import io.avengers.dao.HeroDAO;
 import io.avengers.dao.TeamDAO;
 import io.avengers.domain.Team;
 
@@ -49,6 +50,18 @@ public class TeamService {
 			throw stateException;
 		}
 		
+	}
+	
+	public void createTeam(String team_name){
+		if(team_name == null){
+			System.out.println("name inex");
+		}
+		try {
+			new TeamDAO().createTeam(team_name);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw stateException;
+		}
 	}
 
 

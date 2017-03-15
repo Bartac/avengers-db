@@ -11,6 +11,11 @@ public class Team {
 	List<String> heroes_name = new ArrayList<>();
 	List<byte[]> heroes_picture = new ArrayList<>();
 	
+	
+	public Team(){
+		
+	}
+	
 	public Team(String team_name) {
 		this.team_name = team_name;
 	}
