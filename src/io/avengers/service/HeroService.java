@@ -52,11 +52,25 @@ public class HeroService {
 	public void createHero(String name,String realname){
 		if(name == null || realname == null){
 			System.out.println("name inex");
+			return;
 		}
 		try {
 			new HeroDAO().createHero(name,realname);
 		} catch (SQLException e) {
 			throw stateException;
 		}
+	}
+
+	public void deleteHero(int id) {
+		if (id <= 0){
+			System.out.println("Error, null or negative");
+			return;
+		}
+		try {
+			new HeroDAO().deleteHero(id);
+		} catch (SQLException e) {
+			throw stateException;
+		}
+		
 	}
 }

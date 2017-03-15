@@ -71,10 +71,17 @@ public class HeroDAO extends MarvelDAO {
 		Connection connect = connectToMySQL();
 		Statement statement = connect.createStatement();
 		ResultSet resultSet = statement.executeQuery(query);
-		resultSet.next();
-		Hero hero = resultSetToHero(resultSet);
-		connect.close();
-		return hero;
+		if (resultSet.next()){
+			Hero hero = resultSetToHero(resultSet);
+			connect.close();
+			return hero;
+		}
+		else{
+			connect.close();
+			return null;
+		}
+
+
 	}
 	Hero resultSetToHero(ResultSet resultSet) {
 
@@ -119,7 +126,6 @@ public class HeroDAO extends MarvelDAO {
 		PreparedStatement statement = connect.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 		statement.setString(1, name);
 		statement.execute();
-		
 		ResultSet rs = statement.getGeneratedKeys();
 		int id = -1;
 		if(rs.next()){
@@ -133,6 +139,20 @@ public class HeroDAO extends MarvelDAO {
 		statementirl.setInt(1, id);
 		statementirl.setString(2, realname);
 		statementirl.execute();
+		connect.close();
+	}
+	
+	public void deleteHero(int id) throws SQLException{
+		String query = "DELETE FROM `irl` WHERE hero_id=?";
+		Connection connect = connectToMySQL();
+		PreparedStatement statement = connect.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+		statement.setInt(1, id);
+		statement.execute();
+		
+		String query2 = "DELETE FROM `heroes` WHERE id =?";
+		PreparedStatement statement2 = connect.prepareStatement(query2, Statement.RETURN_GENERATED_KEYS);
+		statement2.setInt(1, id);
+		statement2.execute();
 		connect.close();
 	}
 }
