@@ -105,13 +105,19 @@ public class MovieDAO extends MarvelDAO {
 		}
 	}
 	
-	public void createMovie(String movie_name) throws SQLException  {
+	public int createMovie(String movie_name) throws SQLException  {
 		String query = "INSERT INTO `movie` (`name`) VALUES (?)";
 		Connection connect = connectToMySQL();
 		PreparedStatement statement = connect.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 		statement.setString(1, movie_name);
 		statement.execute();
+		ResultSet rs = statement.getGeneratedKeys();
+		int id = -1;
+		if(rs.next()){
+			id = rs.getInt(1);
+		}
 		connect.close();
+		return id;
 	}
 	
 	

@@ -60,17 +60,17 @@ public class MovieService {
 		}
 	}
 	
-	public void createMovie(String movie_name){
+	public int createMovie(String movie_name){
 		//Guards
 		
 		if (movie_name.isEmpty()){
 			System.out.println("Potential Bug or illegal requesta");
-			return;
+			return -1;
 		}
 		
 		// Method
 		try {
-			new MovieDAO().createMovie(movie_name);
+			return new MovieDAO().createMovie(movie_name);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw stateException;
