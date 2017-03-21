@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.Set;
 
+import io.avengers.dao.HeroDAO;
 import io.avengers.dao.MovieDAO;
 import io.avengers.domain.Movie;
 
@@ -78,5 +79,17 @@ public class MovieService {
 		
 		
 		
+	}
+
+	public void deleteMovie(int id) {
+		if (id <= 0){
+			System.out.println("Error, null or negative");
+			return;
+		}
+		try {
+			new MovieDAO().deleteMovie(id);
+		} catch (SQLException e) {
+			throw stateException;
+		}
 	}
 }
