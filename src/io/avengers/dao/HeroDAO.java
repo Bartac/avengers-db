@@ -124,7 +124,7 @@ public class HeroDAO extends MarvelDAO {
 		}
 	}
 	
-	public void createHero(String name, String realname) throws SQLException{
+	public int createHero(String name, String realname) throws SQLException{
 		
 		String query = "INSERT INTO `heroes` (`name`, `sex`, `likes`, `dislikes`, `picture`, `abilities`, `history`) VALUES (?, '', '0', '0', NULL, NULL, NULL)";
 		Connection connect = connectToMySQL();
@@ -146,6 +146,7 @@ public class HeroDAO extends MarvelDAO {
 		statementirl.execute();
 		
 		connect.close();
+		return id;
 		
 	}
 	
