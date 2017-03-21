@@ -174,6 +174,7 @@ public class HeroDAO extends MarvelDAO {
 	public void deleteHero(int id) throws SQLException{
 		
 		Connection connect = connectToMySQL();
+		/*
 		String queryTeam = "DELETE FROM `team_hero` WHERE id_hero=?";
 		PreparedStatement staTeam = connect.prepareStatement(queryTeam, Statement.RETURN_GENERATED_KEYS);
 		staTeam.setInt(1, id);
@@ -183,7 +184,7 @@ public class HeroDAO extends MarvelDAO {
 		PreparedStatement staMovie = connect.prepareStatement(queryMovie, Statement.RETURN_GENERATED_KEYS);
 		staMovie.setInt(1, id);
 		staMovie.execute();
-		
+		*/
 		String queryIrl = "DELETE FROM `irl` WHERE hero_id=?";
 		PreparedStatement staIrl = connect.prepareStatement(queryIrl, Statement.RETURN_GENERATED_KEYS);
 		staIrl.setInt(1, id);
