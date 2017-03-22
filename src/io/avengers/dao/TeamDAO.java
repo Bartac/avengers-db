@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import io.avengers.domain.Movie;
 import io.avengers.domain.Team;
 
 public class TeamDAO extends MarvelDAO {
@@ -65,10 +66,14 @@ public class TeamDAO extends MarvelDAO {
 		Connection connect = connectToMySQL();
 		Statement statement = connect.createStatement();
 		ResultSet resultSet = statement.executeQuery(query);
-		resultSet.next();
-		Team team = resultSetToTeam(resultSet);
-		connect.close();
-		return team;
+		if (resultSet.next()) {
+			Team team = resultSetToTeam(resultSet);
+			connect.close();
+			return team;
+		} else {
+			connect.close();
+			return null;
+		}
 	}
 	
 	
@@ -127,4 +132,22 @@ public class TeamDAO extends MarvelDAO {
 		System.out.println("id " + id);
 		connect.close();
 	}
+
+	public void deleteTeam(int id) throws SQLException {
+		Connection connect = connectToMySQL();
+		
+		String queryth = "DELETE FROM `team_hero` WHERE team_id=?";
+		PreparedStatement stath = connect.prepareStatement(queryth, Statement.RETURN_GENERATED_KEYS);
+		stath.setInt(1, id);
+		stath.execute();
+		
+		String query = "DELETE FROM `team` WHERE team_id=?";
+		PreparedStatement stateam = connect.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+		stateam.setInt(1, id);
+		stateam.execute();
+		connect.close();
+	}
+
+	
+	
 }

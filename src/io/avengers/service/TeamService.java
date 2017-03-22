@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Set;
 
 import io.avengers.dao.HeroDAO;
+import io.avengers.dao.MovieDAO;
 import io.avengers.dao.TeamDAO;
 import io.avengers.domain.Team;
 
@@ -62,6 +63,19 @@ public class TeamService {
 			e.printStackTrace();
 			throw stateException;
 		}
+	}
+
+	public void deleteTeam(int id) {
+		if (id <= 0){
+			System.out.println("Error, null or negative");
+			return;
+		}
+		try {
+			new TeamDAO().deleteTeam(id);
+		} catch (SQLException e) {
+			throw stateException;
+		}
+		
 	}
 
 
