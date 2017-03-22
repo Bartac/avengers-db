@@ -195,6 +195,17 @@ public class HeroDAO extends MarvelDAO {
 		PreparedStatement staHero = connect.prepareStatement(queryHero, Statement.RETURN_GENERATED_KEYS);
 		staHero.setInt(1, id);
 		staHero.execute();
+		
+		String queryTeam = "DELETE FROM `team_hero` WHERE hero_id=?";
+		PreparedStatement staTeam = connect.prepareStatement(queryTeam, Statement.RETURN_GENERATED_KEYS);
+		staTeam.setInt(1, id);
+		staTeam.execute();
+		
+		String queryMovie = "DELETE FROM `movie_hero` WHERE id_hero=?";
+		PreparedStatement staMovie = connect.prepareStatement(queryMovie, Statement.RETURN_GENERATED_KEYS);
+		staMovie.setInt(1, id);
+		staMovie.execute();
+		
 		connect.close();
 	}
 	
