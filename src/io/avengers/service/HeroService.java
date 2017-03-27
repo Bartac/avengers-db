@@ -92,4 +92,12 @@ public class HeroService {
 			throw stateException;
 		}
 	}
+	
+	public void updateHero(int id_hero, String newname){
+		try {
+			new HeroDAO().updateHero(id_hero, newname);
+		} catch (SQLException e) {
+			throw stateException;
+		}
+	}
 }

@@ -220,4 +220,13 @@ public class HeroDAO extends MarvelDAO {
 		
 		
 	}
+	
+	public void updateHero(int id_hero, String newname) throws SQLException{
+		String query = "UPDATE `heroes` SET `name` = ? WHERE `heroes`.`id` = ?";
+		Connection connect = connectToMySQL();
+		PreparedStatement statement = connect.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+		statement.setString(1, newname);
+		statement.setInt(2, id_hero);
+		statement.execute();
+	}
 }
