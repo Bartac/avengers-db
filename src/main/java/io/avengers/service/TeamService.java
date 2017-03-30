@@ -53,25 +53,31 @@ public class TeamService {
 		
 	}
 	
-	public void createTeam(String team_name){
+	public int createTeam(String team_name){
 		if(team_name == null){
 			System.out.println("name inex");
+			return 0;
+		}
+		if(team_name.isEmpty()){
+			System.out.println("name inex");
+			return 0;
 		}
 		try {
-			new TeamDAO().createTeam(team_name);
+			return new TeamDAO().createTeam(team_name);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw stateException;
 		}
 	}
 
-	public void deleteTeam(int id) {
+	public boolean deleteTeam(int id) {
 		if (id <= 0){
 			System.out.println("Error, null or negative");
-			return;
+			return false;
 		}
 		try {
 			new TeamDAO().deleteTeam(id);
+			return true;
 		} catch (SQLException e) {
 			throw stateException;
 		}

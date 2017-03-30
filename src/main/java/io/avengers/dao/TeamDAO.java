@@ -115,7 +115,7 @@ public class TeamDAO extends MarvelDAO {
 		}
 	}
 	
-	public void createTeam(String team_name) throws SQLException{
+	public int createTeam(String team_name) throws SQLException{
 		
 		String query = "INSERT INTO `team` (`team_id`, `team_name`, `picture`, `history`) VALUES (NULL,?, NULL, NULL)";
 		Connection connect = connectToMySQL();
@@ -131,6 +131,7 @@ public class TeamDAO extends MarvelDAO {
 		
 		System.out.println("id " + id);
 		connect.close();
+		return id;
 	}
 
 	public void deleteTeam(int id) throws SQLException {

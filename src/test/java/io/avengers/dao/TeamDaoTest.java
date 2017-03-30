@@ -48,6 +48,36 @@ public class TeamDaoTest {
 		assertTrue(team.contains(new Team("Avengers")));
 		assertTrue(team.contains(new Team("Xmen")));
 	}
+	
+	@Test
+	public void testFindTeamById() throws SQLException{
+		//Find Same Team Avengers 1
+		assertTrue(dao.findTeamById("1").getTeam_name().equals("Avengers"));
+		
+		//If the id is a string, return null
+		assertTrue(dao.findTeamById("hey") == null);
+		
+		//If the id doesn't exist, return null
+		assertTrue(dao.findTeamById("10") == null);
+		
+	}
 
+	@Test
+	public void testCreateAndDeleteTeam() throws SQLException{
+		//Create a Team Justice League
+		String s = "Justice League";
+		Integer id = dao.createTeam(s);
+		
+		//Check if the team exists
+		assertTrue(dao.findTeamByName(s).iterator().next().getTeam_name().equals(s));
+		
+		//Delete Team
+		dao.deleteTeam(id);
+		
+		//Check id deleted team exist
+		assertTrue(dao.findTeamById(id.toString())==null);
+		
+	}
+	
 
 }
