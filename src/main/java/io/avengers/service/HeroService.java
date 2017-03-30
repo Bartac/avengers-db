@@ -5,6 +5,7 @@ import java.util.Set;
 
 import io.avengers.dao.HeroDAO;
 import io.avengers.domain.Hero;
+import io.avengers.domain.Team;
 
 public class HeroService {
 
@@ -60,6 +61,18 @@ public class HeroService {
 			throw stateException;
 		}
 	}
+	
+	public Hero createHero(String name,String realname, Team team){
+		int id = createHero(name, realname);
+		try {
+			new HeroDAO().addHeroToTeam(team.getTeam_name(), name);
+			return new HeroDAO().findHeroesById(String.valueOf(id));
+		} catch (SQLException e) {
+			throw stateException;
+		}
+		
+	}
+
 
 	public void deleteHero(int id) {
 		if (id <= 0){
