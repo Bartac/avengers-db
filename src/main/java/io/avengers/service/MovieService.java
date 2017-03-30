@@ -63,11 +63,15 @@ public class MovieService {
 	
 	public int createMovie(String movie_name){
 		//Guards
-		
+		if (movie_name == null){
+			System.out.println("Potential Bug or illegal requesta");
+			return -1;
+		}
 		if (movie_name.isEmpty()){
 			System.out.println("Potential Bug or illegal requesta");
 			return -1;
 		}
+		
 		
 		// Method
 		try {
@@ -81,13 +85,14 @@ public class MovieService {
 		
 	}
 
-	public void deleteMovie(int id) {
+	public boolean deleteMovie(int id) {
 		if (id <= 0){
 			System.out.println("Error, null or negative");
-			return;
+			return false;
 		}
 		try {
 			new MovieDAO().deleteMovie(id);
+			return true;
 		} catch (SQLException e) {
 			throw stateException;
 		}

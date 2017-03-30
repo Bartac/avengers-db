@@ -51,6 +51,36 @@ public class MovieDaoTest {
 		assertTrue(movies.contains(new Movie("The Incredible Hulk")));
 		assertTrue(movies.contains(new Movie("Captain America: Civil War")));
 	}
+	
+	@Test
+	public void testFindMovieById() throws SQLException{
+		//Find Iron team movie 1
+		assertTrue(dao.findMoviesById("1").getName().equals("Iron Man"));
+		
+		//If the id is a string, return null
+		assertTrue(dao.findMoviesById("hey") == null);
+		
+		//If the id doesn't exist, return null
+		assertTrue(dao.findMoviesById("100") == null);
+		
+	}
+
+	@Test
+	public void testCreateAndDeleteMovie() throws SQLException{
+		//Create a movie Spiderman
+		String s = "DeadPool";
+		Integer id = dao.createMovie(s);
+		
+		//Check if the team exists
+		assertTrue(dao.findMoviesById(id.toString()).getId() == id);
+		
+		//Delete Team
+		dao.deleteMovie(id);
+		
+		//Check id deleted team exist
+		assertTrue(dao.findMoviesById(id.toString())==null);
+		
+	}
 
 
 }
