@@ -78,7 +78,7 @@ public class TeamServiceTest {
 		
 		//Check if the team exists
 		assertTrue(service.findTeamByName(s).iterator().next().getTeam_name().equals(s));
-
+		
 		//Delete Team
 		service.deleteTeam(id);	
 		
