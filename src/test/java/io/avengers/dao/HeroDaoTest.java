@@ -4,24 +4,33 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Set;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import io.avengers.domain.Hero;
 import io.avengers.domain.Movie;
+import io.avengers.reset.ResetApplication;
 
 public class HeroDaoTest {
 
 	HeroDAO dao;
 	Connection connect;
 	
+	@BeforeClass
+	public static void deleteDataBase() throws SQLException, IOException{
+		ResetApplication.main(new String[0]);
+	}
+	
 	@Before
 	public void setUp() throws Exception {
+		
 		dao = new HeroDAO();
 		connect = dao.connectToMySQL();
 	}
